@@ -1,0 +1,8 @@
+0 - Dont Panic 
+1 - Understand the Inputs
+2 - What are the Outust 
+3 - Solve the problem
+        --> Work Out Some Examples before Diving into Coding
+        --> Consider Systematical way of How human will sove the problem..
+4-Code..
+5- Don't Optimize Prematurely,Simple and Correct..
