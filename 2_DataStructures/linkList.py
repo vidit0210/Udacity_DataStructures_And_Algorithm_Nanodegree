@@ -71,3 +71,11 @@ class LinkedList:
 
         node.next = Node(value)
         return
+
+    def toList(self):
+        l = []
+        node = self.head
+        while node:
+            l.append(node.value)
+            node = node.next
+        return l
