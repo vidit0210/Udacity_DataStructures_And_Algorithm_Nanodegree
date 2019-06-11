@@ -3,6 +3,7 @@ Read file into texts and calls.
 It's ok if you don't understand how to read files.
 """
 import csv
+import re
 
 with open('texts.csv', 'r') as f:
     reader = csv.reader(f)
@@ -43,3 +44,63 @@ Print the answer as a part of a message::
 to other fixed lines in Bangalore."
 The percentage should have 2 decimal digits
 """
+
+toMatch = "(080)"  # Fixed Lines
+
+caller_fixed_code = []
+
+called_by_bangalore = []
+callers = []
+recievers = []
+for call in calls:
+    if(toMatch in call[0]):
+        called_by_bangalore.append(call[1])
+        callers.append(call[0])
+
+len_callers = float(len(callers))
+for call in called_by_bangalore:
+    if(toMatch in call):
+        recievers.append(call)
+
+len_receivers = float(len(recievers))
+
+area_code = []  # Begins With 080
+mobile_number = []  # have Space in Between
+telem = []  # 140
+s = "(04344)316423"
+start = re.escape("(")
+end = re.escape(")")
+result = re.search('%s(.*)%s' % (start, end), s).group(1)
+
+mobile_match = " "
+telem_match = "140"
+for call in called_by_bangalore:
+
+    if(str(call[0:3]) == telem_match):
+        telem.append(call[0:3])
+    elif(mobile_match in call):
+        mobile_number.append(call[0:4])
+    else:
+        result = re.search('%s(.*)%s' % (start, end), str(call)).group(1)
+        area_code.append(result)
+
+
+area_code = list(set(area_code))
+mobile_number = list(set(mobile_number))
+telem = list(set(telem))
+all_codes = area_code + mobile_number + telem
+all_codes = list(set(all_codes))
+all_codes = sorted(all_codes)
+print("The numbers called by people in Bangalore have codes:")
+for num in all_codes:
+    print(num)
+
+
+"""
+Part B
+"""
+# print(length_fixed_code)
+# print(len(caller_fixed_code))
+
+percentage = (len_receivers/len_callers) * 100
+print(round(percentage, 2))

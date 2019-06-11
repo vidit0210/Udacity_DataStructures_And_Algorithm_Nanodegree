@@ -1,1 +1,1 @@
-First record of texts, <incoming number> texts <answering number> at time <time>
+length_fixed_code
